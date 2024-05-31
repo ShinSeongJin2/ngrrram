@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug Rust Program",
+            "program": "${workspaceFolder}/target/debug/ngrrram.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Compile Rust",
+            "sourceLanguages": ["rust"],
+            "terminal": "external"
+        }
+    ]
+}

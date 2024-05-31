@@ -1,4 +1,5 @@
 use clap::Parser;
+use std::process::Command;
 
 mod tui;
 mod game;
@@ -146,6 +147,20 @@ fn validate_args(args: &Args) -> bool {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // #region "chcp 65001"를 먼저 실행시켜서 디버깅시에 유니코드 문자 깨짐 방지
+    let output = Command::new("cmd")
+        .args(&["/C", "chcp 65001"])
+        .output()?;
+
+    if !output.status.success() {
+        eprintln!("Failed to set terminal to UTF-8");
+        std::process::exit(1);
+    }
+
+    println!("Terminal set to UTF-8");
+    // #endregion
+
+
     let args = Args::parse();
 
     if !validate_args(&args) {
